@@ -54,11 +54,27 @@ function createCalculator() {
     };
 exports.createCalculator = createCalculator;
 
-//"9".charCodeAt(0)
+
 function caesar(string,shift) {
     let cypher = [];
+    //90	Z uppercase z
+    //122	z lowercase z
     for(let i=0; i<string.length; i++){
-        cypher[i]=String.fromCharCode(string.charCodeAt(i)+shift)
+        //uppercase wrap
+        if(string.charCodeAt(i)<=90 && string.charCodeAt(i)+shift>90)
+        {
+            cypher[i]=String.fromCharCode(string.charCodeAt(i)+shift-26);
+        }
+        //lowercase wrap
+        else if(string.charCodeAt(i)<=122 && string.charCodeAt(i)+shift>122)
+        {
+            cypher[i]=String.fromCharCode(string.charCodeAt(i)+shift-26);
+        }
+        //no overflow
+        else
+        {
+        cypher[i]=String.fromCharCode(string.charCodeAt(i)+shift);
+        }
     };
 
     return cypher.join('');
